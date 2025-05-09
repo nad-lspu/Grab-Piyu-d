@@ -1,0 +1,317 @@
+<CheckoutScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: dp(10)
+        padding: [dp(0), dp(0), dp(0), dp(10)]
+        canvas.before:
+            Color:
+                rgba: 0.2, 0.6, 0.3, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint: 1, None
+            height: dp(80)
+            padding: [dp(10), dp(10), dp(10), 0]
+
+            FitImage:
+                source: "assets/GrabPiyudLong_w.png"
+                size_hint: 1, 1
+                allow_stretch: False
+                keep_ratio: True
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            bar_width: dp(4)
+            bar_color: 0.12, 0.65, 0.32, 1
+            bar_inactive_color: 0.8, 0.8, 0.8, 0.5
+            effect_cls: "ScrollEffect"
+
+            MDBoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [dp(10), dp(10)]
+                spacing: dp(10)
+
+                MDCard:
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    elevation: 1
+                    padding: dp(15)
+                    spacing: dp(10)
+                    radius: [dp(20)]
+                    orientation: "vertical"
+                    md_bg_color: 0.97, 0.97, 0.97, 1
+                    adaptive_height: True
+
+                    MDLabel:
+                        text: "Checkout"
+                        font_name: "assets/fonts/NotoSansKhmer.ttf"
+                        font_size: "24sp"
+                        halign: "center"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(40)
+
+                    MDSeparator:
+                        height: dp(1)
+
+                    MDLabel:
+                        text: "Order Summary"
+                        font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                        font_style: "H6"
+                        halign: "left"
+                        size_hint_y: None
+                        height: dp(40)
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: dp(100)
+                        md_bg_color: 0.95, 0.95, 0.95, 1
+                        radius: [dp(10)]
+                        padding: dp(5)
+
+                        ScrollView:
+                            do_scroll_x: False
+                            do_scroll_y: True
+                            bar_width: dp(4)
+                            bar_color: 0.12, 0.65, 0.32, 1
+                            bar_inactive_color: 0.8, 0.8, 0.8, 0.5
+
+                            MDList:
+                                id: order_summary_list
+                                padding: 0
+                                spacing: dp(2)
+                                adaptive_height: True
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: dp(40)
+                        padding: [dp(0), dp(5)]
+
+                        MDLabel:
+                            id: contact_info
+                            text: "Contact: Loading..."
+                            font_name: "assets/fonts/NotoSansKhmer.ttf"
+                            halign: "left"
+                            size_hint_y: None
+                            height: dp(30)
+
+                    MDLabel:
+                        text: "Delivery Method"
+                        font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                        font_style: "H6"
+                        halign: "left"
+                        size_hint_y: None
+                        height: dp(40)
+
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: dp(60)
+                        spacing: dp(10)
+                        padding: [dp(0), dp(5)]
+
+                        MDCard:
+                            size_hint: 0.5, None
+                            height: dp(50)
+                            md_bg_color: 0.98, 0.98, 0.98, 1
+                            radius: [dp(10)]
+                            ripple_behavior: True
+                            on_release: root.set_delivery_method("delivery")
+
+                            MDBoxLayout:
+                                orientation: "horizontal"
+                                padding: [dp(10), 0]
+
+                                MDCheckbox:
+                                    id: delivery_checkbox
+                                    size_hint: None, None
+                                    size: dp(48), dp(48)
+                                    active: True
+                                    pos_hint: {"center_y": 0.5}
+                                    selected_color: 0.12, 0.65, 0.32, 1
+
+                                MDLabel:
+                                    text: "Delivery"
+                                    theme_text_color: "Primary"
+                                    pos_hint: {"center_y": 0.5}
+
+                        MDCard:
+                            size_hint: 0.5, None
+                            height: dp(50)
+                            md_bg_color: 0.98, 0.98, 0.98, 1
+                            radius: [dp(10)]
+                            ripple_behavior: True
+                            on_release: root.set_delivery_method("pickup")
+
+                            MDBoxLayout:
+                                orientation: "horizontal"
+                                padding: [dp(10), 0]
+
+                                MDCheckbox:
+                                    id: pickup_checkbox
+                                    size_hint: None, None
+                                    size: dp(48), dp(48)
+                                    active: False
+                                    pos_hint: {"center_y": 0.5}
+                                    selected_color: 0.12, 0.65, 0.32, 1
+
+                                MDLabel:
+                                    text: "Pickup"
+                                    theme_text_color: "Primary"
+                                    pos_hint: {"center_y": 0.5}
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: dp(90)
+                        padding: [dp(0), dp(5)]
+                        spacing: dp(5)
+
+                        MDLabel:
+                            id: delivery_address_label
+                            text: "Delivery Address"
+                            font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                            font_style: "H6"
+                            halign: "left"
+                            size_hint_y: None
+                            height: dp(30)
+
+                        MDTextField:
+                            id: delivery_address
+                            hint_text: "Enter your delivery address"
+                            helper_text_mode: "on_focus"
+                            size_hint_y: None
+                            height: dp(50)
+                            multiline: False
+                            disabled: False
+                            focus: False
+                            write_tab: False
+
+                    MDBoxLayout:
+                        id: pickup_time_section
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: 0
+                        padding: [dp(0), dp(5)]
+                        spacing: dp(5)
+                        opacity: 0
+
+                        MDLabel:
+                            text: "Pickup Time"
+                            font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                            font_style: "H6"
+                            halign: "left"
+                            size_hint_y: None
+                            height: dp(30)
+
+                        MDTextField:
+                            id: pickup_time
+                            hint_text: "Preferred pickup time"
+                            helper_text: "e.g., 5:30 PM"
+                            helper_text_mode: "on_focus"
+                            size_hint_y: None
+                            height: dp(50)
+                            multiline: False
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: dp(90)
+                        padding: [dp(0), dp(5)]
+                        spacing: dp(5)
+
+                        MDLabel:
+                            text: "Special Instructions"
+                            font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                            font_style: "H6"
+                            halign: "left"
+                            size_hint_y: None
+                            height: dp(30)
+
+                        MDTextField:
+                            id: special_instructions
+                            hint_text: "Any special requests for your order (Optional)"
+                            helper_text: "Allergies, preferences, etc."
+                            helper_text_mode: "on_focus"
+                            size_hint_y: None
+                            height: dp(60)
+                            multiline: True
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: dp(40)
+                        padding: [dp(0), dp(5)]
+
+                        MDLabel:
+                            text: "Payment Method: Cash on Delivery"
+                            font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                            font_style: "H6"
+                            halign: "left"
+                            size_hint_y: None
+                            height: dp(30)
+
+                    MDSeparator:
+                        height: dp(1)
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: dp(50)
+                        padding: [dp(10), dp(10)]
+
+                        MDLabel:
+                            text: "Order Total:"
+                            font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                            font_style: "H6"
+                            halign: "left"
+                            size_hint_x: 0.5
+
+                        MDLabel:
+                            id: checkout_total
+                            text: "₱0.00"
+                            font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                            font_style: "H6"
+                            halign: "right"
+                            bold: True
+                            theme_text_color: "Custom"
+                            text_color: 0.9, 0.5, 0.1, 1
+                            size_hint_x: 0.5
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    spacing: dp(15)
+                    size_hint_y: None
+                    height: dp(60)
+                    padding: [dp(0), dp(15), dp(0), dp(5)]
+
+                    MDFillRoundFlatButton:
+                        text: "Back to Cart"
+                        font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                        md_bg_color: 1, 1, 1, 1
+                        text_color: 0.12, 0.65, 0.32, 1
+                        size_hint_x: 0.5
+                        on_release: root.go_back()
+                        icon: "cart"
+                        icon_size: "18sp"
+                        font_size: "16sp"
+                        elevation: 3
+
+                    MDFillRoundFlatButton:
+                        text: "Place Order"
+                        font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                        md_bg_color: 0.9, 0.5, 0.1, 1
+                        text_color: 1, 1, 1, 1
+                        size_hint_x: 0.5
+                        on_release: root.place_order()
+                        icon: "check-circle"
+                        icon_size: "18sp"
+                        font_size: "16sp"
+                        elevation: 3

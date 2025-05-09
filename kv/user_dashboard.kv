@@ -1,0 +1,123 @@
+<UserDashboard>:
+    MDFloatLayout:
+        md_bg_color: 0.12, 0.65, 0.32, 1
+
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint: 1, None
+            height: dp(120)
+            pos_hint: {"top": 1}
+            padding: [dp(10), dp(10), dp(10), 0]
+            FitImage:
+                source: "assets/GrabPiyudLong_w.png"
+                size_hint: 1, 1
+                allow_stretch: True
+                keep_ratio: True
+
+        MDCard:
+            size_hint: 0.95, 0.8
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
+            elevation: 1
+            padding: dp(25)
+            spacing: dp(20)
+            radius: [dp(20)]
+            orientation: "vertical"
+            md_bg_color: 0.97, 0.97, 0.97, 1
+
+            BoxLayout:
+                orientation: "vertical"
+                spacing: dp(15)
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [0, dp(10)]
+
+                MDIconButton:
+                    icon: "account-circle"
+                    icon_size: "80sp"
+                    theme_text_color: "Secondary"
+                    pos_hint: {"center_x": 0.5}
+                    disabled: True
+
+                MDLabel:
+                    id: user_name
+                    text: "Loading Name..."
+                    font_name: "assets/fonts/NotoSansKhmer.ttf"
+                    halign: "center"
+                    font_size: "20sp"
+                    bold: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                MDLabel:
+                    id: user_email
+                    text: "Loading Email..."
+                    font_name: "assets/fonts/NotoSansKhmer.ttf"
+                    halign: "center"
+                    font_size: "16sp"
+                    theme_text_color: "Secondary"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            MDSeparator:
+                height: dp(1)
+
+            BoxLayout:
+                orientation: "vertical"
+                spacing: dp(15)
+                size_hint_y: 1
+
+                MDLabel:
+                    text: "Order History"
+                    font_name: "assets/fonts/NotoSansKhmer.ttf"
+                    font_size: "18sp"
+                    halign: "left"
+                    bold: True
+                    size_hint_y: None
+                    height: dp(30)
+
+                ScrollView:
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    bar_width: dp(4)
+                    bar_color: 0.12, 0.65, 0.32, 1
+                    bar_inactive_color: 0.8, 0.8, 0.8, 0.5
+                    effect_cls: "ScrollEffect"
+
+                    MDList:
+                        id: order_history
+                        spacing: dp(15)
+                        padding: [0, dp(10), 0, dp(10)]
+                        size_hint_y: None
+                        height: self.minimum_height
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: dp(15)
+            size_hint: 0.95, None
+            height: dp(60)
+            padding: dp(10)
+            pos_hint: {"center_x": 0.5, "bottom": 0.02}
+
+            MDFillRoundFlatButton:
+                text: "Order Now"
+                font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                md_bg_color: 1, 1, 1, 1
+                text_color: 0.12, 0.65, 0.32, 1
+                size_hint_x: 0.6
+                on_release: root.navigate_to_menu()
+                icon: "food"
+                elevation: 4
+                icon_size: "18sp"
+                font_size: "16sp"
+
+            MDFillRoundFlatButton:
+                text: "Logout"
+                font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                md_bg_color: 1, 1, 1, 1
+                text_color: 0.9, 0.2, 0.2, 1
+                size_hint_x: 0.4
+                on_release: root.logout()
+                icon: "logout"
+                elevation: 4
+                icon_size: "18sp"
+                font_size: "16sp"

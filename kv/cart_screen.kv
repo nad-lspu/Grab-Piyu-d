@@ -1,0 +1,218 @@
+<CartScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: 0.2, 0.6, 0.3, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint: 1, None
+            height: dp(120)
+            pos_hint: {"top": 1}
+            padding: [dp(10), dp(10), dp(10), 0]
+
+            FitImage:
+                source: "assets/GrabPiyudLong_w.png"
+                size_hint: 1, 1
+                allow_stretch: False
+                keep_ratio: True
+
+        MDCard:
+            size_hint: 0.95, 0.75
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
+            elevation: 1
+            padding: dp(25)
+            spacing: dp(20)
+            radius: [dp(20)]
+            orientation: "vertical"
+            md_bg_color: 0.97, 0.97, 0.97, 1
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: dp(40)
+
+                MDLabel:
+                    text: "Your Cart"
+                    font_name: "assets/fonts/NotoSansKhmer.ttf"
+                    font_size: "24sp"
+                    halign: "center"
+                    bold: True
+
+                MDLabel:
+                    id: cart_item_count
+                    text: "(0 items)"
+                    font_name: "assets/fonts/NotoSansKhmer.ttf"
+                    font_size: "16sp"
+                    halign: "right"
+                    theme_text_color: "Secondary"
+                    pos_hint: {"center_y": 0.5}
+
+            MDSeparator:
+                height: dp(1)
+
+            BoxLayout:
+                orientation: "vertical"
+                spacing: dp(10)
+
+                ScrollView:
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    bar_width: dp(4)
+                    bar_color: 0.12, 0.65, 0.32, 1
+                    bar_inactive_color: 0.8, 0.8, 0.8, 0.5
+                    effect_cls: "ScrollEffect"
+
+                    MDBoxLayout:
+                        id: cart_list
+                        orientation: "vertical"
+                        spacing: dp(10)
+                        padding: dp(5)
+                        size_hint_y: None
+                        height: self.minimum_height
+
+            MDSeparator:
+                height: dp(1)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: dp(50)
+                padding: [dp(10), dp(10)]
+
+                MDLabel:
+                    text: "Total Amount:"
+                    font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                    font_style: "H6"
+                    halign: "left"
+                    size_hint_x: 0.5
+
+                MDLabel:
+                    id: cart_total
+                    text: "₱0.00"
+                    font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                    font_style: "H6"
+                    halign: "right"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.9, 0.5, 0.1, 1
+                    size_hint_x: 0.5
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: dp(15)
+            size_hint: 0.95, None
+            height: dp(60)
+            padding: dp(10)
+            pos_hint: {"center_x": 0.5, "bottom": 0.02}
+
+            MDFillRoundFlatButton:
+                text: "Back to Menu"
+                font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                md_bg_color: 1, 1, 1, 1
+                text_color: 0.12, 0.65, 0.32, 1
+                size_hint_x: 0.5
+                on_release: root.go_back()
+                icon: "food"
+                icon_size: "18sp"
+                font_size: "16sp"
+                elevation: 3
+
+            MDFillRoundFlatButton:
+                text: "Checkout"
+                font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                md_bg_color: 0.9, 0.5, 0.1, 1
+                text_color: 1, 1, 1, 1
+                size_hint_x: 0.5
+                on_release: root.proceed_to_checkout()
+                icon: "cart-check"
+                icon_size: "18sp"
+                font_size: "16sp"
+                elevation: 3
+
+<CartItem@MDCard>:
+    orientation: "horizontal"
+    size_hint_y: None
+    height: dp(70)
+    padding: dp(10)
+    spacing: dp(8)
+    elevation: 0.5
+    radius: [dp(8)]
+    md_bg_color: 0.98, 0.98, 0.98, 1
+    item_id: ""
+    item_name: ""
+    quantity: 1
+    price: 0
+
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint_x: 0.5
+        spacing: dp(2)
+
+        MDLabel:
+            text: root.item_name
+            font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+            font_style: "Subtitle1"
+            bold: True
+            theme_text_color: "Primary"
+            size_hint_y: None
+            height: dp(30)
+
+        MDLabel:
+            text: f"₱{root.price:.2f} each"
+            font_style: "Caption"
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: dp(20)
+
+    MDBoxLayout:
+        orientation: "horizontal"
+        size_hint_x: 0.5
+        spacing: dp(4)
+
+        MDIconButton:
+            icon: "minus"
+            theme_icon_color: "Custom"
+            icon_color: 0.12, 0.65, 0.32, 1
+            pos_hint: {"center_y": 0.5}
+            on_release: app.root.get_screen("cart_screen").modify_quantity(root.item_id, -1)
+            user_font_size: "18sp"
+
+        MDLabel:
+            text: str(root.quantity)
+            halign: "center"
+            theme_text_color: "Primary"
+            bold: True
+            size_hint_x: None
+            width: dp(30)
+            pos_hint: {"center_y": 0.5}
+
+        MDIconButton:
+            icon: "plus"
+            theme_icon_color: "Custom"
+            icon_color: 0.12, 0.65, 0.32, 1
+            pos_hint: {"center_y": 0.5}
+            on_release: app.root.get_screen("cart_screen").modify_quantity(root.item_id, 1)
+            user_font_size: "18sp"
+
+        MDIconButton:
+            icon: "delete"
+            theme_icon_color: "Custom"
+            icon_color: 0.9, 0.3, 0.3, 1
+            pos_hint: {"center_y": 0.5}
+            on_release: app.root.get_screen("cart_screen").remove_item(root.item_id)
+            user_font_size: "18sp"
+
+        MDLabel:
+            text: f"₱{root.price * root.quantity:.2f}"
+            halign: "right"
+            theme_text_color: "Custom"
+            text_color: 0.9, 0.5, 0.1, 1
+            bold: True
+            size_hint_x: None
+            width: dp(70)
+            pos_hint: {"center_y": 0.5}

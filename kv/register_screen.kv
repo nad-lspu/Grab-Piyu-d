@@ -1,0 +1,120 @@
+<RegisterScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "20dp"
+        padding: "40dp"
+        pos_hint: {"center_y": 0.5}
+        size_hint_y: None
+        height: self.minimum_height
+
+        MDLabel:
+            text: "Registration"
+            halign: "center"
+            font_style: "H3"
+            font_name: "assets/fonts/Churchward Lorina Bold.ttf"
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        MDTextField:
+            id: reg_name
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            hint_text: "Full Name"
+            icon_right: "account"
+            size_hint_x: 0.8
+            size_hint_y: None
+            height: "48dp"
+            max_width: 350
+            pos_hint: {"center_x": 0.5}
+            helper_text_mode: "on_error"
+
+        MDTextField:
+            id: reg_role
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            hint_text: "Select Role"
+            icon_right: "account-tie"
+            readonly: True
+            on_focus: if self.focus: root.open_role_menu()
+            size_hint_x: 0.8
+            size_hint_y: None
+            height: "48dp"
+            max_width: 350
+            pos_hint: {"center_x": 0.5}
+            helper_text_mode: "on_error"
+
+        MDTextField:
+            id: reg_email
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            hint_text: "Email"
+            icon_right: "email"
+            size_hint_x: 0.8
+            size_hint_y: None
+            height: "48dp"
+            max_width: 350
+            pos_hint: {"center_x": 0.5}
+            helper_text_mode: "on_error"
+
+        MDTextField:
+            id: reg_phone
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            hint_text: "Phone Number"
+            icon_right: "phone"
+            size_hint_x: 0.8
+            size_hint_y: None
+            height: "48dp"
+            max_width: 350
+            pos_hint: {"center_x": 0.5}
+            helper_text_mode: "on_error"
+            input_filter: "int"
+            max_text_length: 11
+
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint_x: 0.8
+            size_hint_y: None
+            height: password_container.height + show_password_button.height + dp(5)
+            max_width: 350
+            pos_hint: {"center_x": 0.5}
+            spacing: "5dp"
+
+            MDBoxLayout:
+                id: password_container
+                size_hint_y: None
+                height: "48dp"
+
+                MDTextField:
+                    id: reg_password
+                    hint_text: "Password"
+                    icon_right: "lock"
+                    password: True
+                    helper_text_mode: "on_error"
+                    size_hint_y: None
+                    height: "48dp"
+
+            MDTextButton:
+                id: show_password_button
+                text: "[b]Show Password[/b]" if reg_password.password else "[b]Hide Password[/b]"
+                font_name: "assets/fonts/NotoSansKhmer.ttf"
+                markup: True
+                halign: "left"
+                theme_text_color: "Custom"
+                text_color: app.theme_cls.primary_color
+                size_hint_y: None
+                height: self.texture_size[1]
+                on_release: root.toggle_password_visibility(reg_password)
+
+        MDRaisedButton:
+            text: "Register"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            pos_hint: {"center_x": 0.5}
+            size_hint_y: None
+            height: "48dp"
+            on_release: root.register_user()
+
+        MDTextButton:
+            text: "Already have an account? [u]Login[/u]"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            markup: True
+            pos_hint: {"center_x": 0.5}
+            size_hint_y: None
+            height: self.texture_size[1]
+            on_release: app.root.current = "login_screen"

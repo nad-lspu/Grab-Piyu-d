@@ -1,0 +1,96 @@
+<AdminDashboard>:
+    name: "admin_dashboard"
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "[font=assets/fonts/Churchward Lorina Bold]Admin Dashboard[/font]"
+            elevation: 4
+            md_bg_color: app.theme_cls.primary_color
+            right_action_items: [["logout", lambda x: setattr(app.root, "current", "login_screen")]]
+
+        MDNavigationLayout:
+            MDScreenManager:
+                id: screen_manager
+
+                MDScreen:
+                    name: "home"
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: "10dp"
+                        spacing: "20dp"
+
+                        MDLabel:
+                            text: "Welcome!"
+                            halign: "center"
+                            font_style: "H5"
+                            font_name: "assets/fonts/Churchward Lorina Bold.ttf"
+                            font_size: "30sp"
+
+                        GridLayout:
+                            cols: 2
+                            spacing: "100dp"
+                            padding: "5dp"
+                            size_hint_x: None
+                            width: self.minimum_width
+                            height: self.minimum_height
+                            pos_hint: {"center_x": 0.5}
+
+                            MDCard:
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: "250dp", "200dp"
+                                radius: [12]
+                                elevation: 2
+                                md_bg_color: app.theme_cls.primary_light
+                                on_release: app.root.current = "orders_screen"
+                                pos_hint: {"center_x": 0.5}
+
+                                BoxLayout:
+                                    orientation: "vertical"
+                                    spacing: "15dp"
+                                    padding: "10dp"
+
+                                    MDIcon:
+                                        icon: "clipboard-list"
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 1]
+                                        halign: "center"
+                                        font_size: "60sp"
+
+                                    MDLabel:
+                                        text: "Manage Orders"
+                                        halign: "center"
+                                        font_name: "assets/fonts/RigSolid-BoldReverse.ttf"
+                                        font_size: "40dp"
+
+
+                            MDCard:
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: "250dp", "200dp"
+                                radius: [12]
+                                elevation: 2
+                                md_bg_color: app.theme_cls.primary_light
+                                on_release: app.root.current = "menu_management_screen"
+                                pos_hint: {"center_x": 0.5}
+
+                                BoxLayout:
+                                    orientation: "vertical"
+                                    spacing: "15dp"
+                                    padding: "10dp"
+
+                                    MDIcon:
+                                        icon: "silverware-fork-knife"
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 1]
+                                        halign: "center"
+                                        font_size: "60sp"
+
+                                    MDLabel:
+                                        text: "Manage Menu"
+                                        halign: "center"
+                                        font_name: "assets/fonts/RigSolid-BoldReverse.ttf"
+                                        font_size: "40dp"

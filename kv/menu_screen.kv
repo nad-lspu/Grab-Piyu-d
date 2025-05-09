@@ -1,0 +1,96 @@
+<MenuScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: 0.2, 0.6, 0.3, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint: 1, None
+            height: dp(120)
+            pos_hint: {"top": 1}
+            padding: [dp(10), dp(10), dp(10), 0]
+
+            FitImage:
+                source: "assets/GrabPiyudLong_w.png"
+                size_hint: 1, 1
+                allow_stretch: False
+                keep_ratio: True
+
+        MDCard:
+            size_hint: 0.95, 0.75
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
+            elevation: 1
+            padding: dp(25)
+            spacing: dp(20)
+            radius: [dp(20)]
+            orientation: "vertical"
+            md_bg_color: 0.97, 0.97, 0.97, 1
+
+            MDLabel:
+                text: "Menu"
+                font_name: "assets/fonts/NotoSansKhmer.ttf"
+                font_size: "24sp"
+                halign: "center"
+                bold: True
+                size_hint_y: None
+                height: dp(40)
+
+            MDSeparator:
+                height: dp(1)
+
+            BoxLayout:
+                orientation: "vertical"
+                spacing: dp(10)
+
+                ScrollView:
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    bar_width: dp(4)
+                    bar_color: 0.12, 0.65, 0.32, 1
+                    bar_inactive_color: 0.8, 0.8, 0.8, 0.5
+                    effect_cls: "ScrollEffect"
+
+                    GridLayout:
+                        id: menu_list
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(10)
+                        padding: dp(5)
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: dp(15)
+            size_hint: 0.95, None
+            height: dp(60)
+            padding: dp(10)
+            pos_hint: {"center_x": 0.5, "bottom": 0.02}
+
+            MDFillRoundFlatButton:
+                text: "Back to Dashboard"
+                font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                md_bg_color: 1, 1, 1, 1
+                text_color: 0.12, 0.65, 0.32, 1
+                size_hint_x: 0.5
+                on_release: root.go_back()
+                icon: "home"
+                icon_size: "18sp"
+                font_size: "16sp"
+                elevation: 3
+
+            MDFillRoundFlatButton:
+                text: "View Cart"
+                font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
+                md_bg_color: 1, 1, 1, 1
+                text_color: 0.9, 0.5, 0.1, 1
+                size_hint_x: 0.5
+                on_release: root.navigate_to_cart()
+                icon: "cart"
+                icon_size: "18sp"
+                font_size: "16sp"
+                elevation: 3

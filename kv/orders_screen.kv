@@ -1,0 +1,58 @@
+<Orders>:
+    name: "orders_screen"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 0
+        padding: 0
+
+        MDTopAppBar:
+            id: toolbar
+            title: "[font=assets/fonts/Churchward Lorina Bold]Order Management[/font]"
+            elevation: 2
+            left_action_items: [["arrow-left", lambda x: setattr(app.root, "current", "admin_dashboard")]]
+            right_action_items: [["refresh", lambda x: root.load_orders()]]
+            md_bg_color: app.theme_cls.primary_color
+            pos_hint: {"top": 1}
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(60)
+            padding: [dp(15), dp(10), dp(15), dp(10)]
+            spacing: dp(10)
+            md_bg_color: app.theme_cls.primary_light
+
+            MDLabel:
+                text: "Filter by:"
+                font_style: "Subtitle1"
+                size_hint_x: None
+                width: dp(80)
+                halign: "right"
+                valign: "center"
+
+            MDFillRoundFlatButton:
+                id: filter_button
+                text: root.status_filter
+                size_hint_x: 0.4
+                on_release: root.filter_menu.open()
+                icon: "filter-variant"
+                icon_size: dp(20)
+                font_size: "14sp"
+
+            MDLabel:
+                text: f"Showing: {root.status_filter}"
+                font_style: "Body1"
+                size_hint_x: 0.6
+                halign: "left"
+                valign: "center"
+
+        ScrollView:
+            MDGridLayout:
+                id: orders_list
+                cols: 1
+                spacing: dp(15)
+                padding: dp(15)
+                size_hint_y: None
+                height: self.minimum_height
+                adaptive_height: True

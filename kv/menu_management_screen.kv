@@ -1,0 +1,50 @@
+<MenuManagement>:
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "0dp"
+        padding: "0dp"
+
+        MDTopAppBar:
+            title: "[font=assets/fonts/Churchward Lorina Bold]Menu Management[/font]"
+            elevation: 4
+            left_action_items: [["arrow-left", lambda x: setattr(app.root, "current", "admin_dashboard")]]
+            md_bg_color: app.theme_cls.primary_color
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: "10dp"
+                padding: "10dp"
+
+                MDLabel:
+                    id: no_items_label
+                    text: "No menu items available"
+                    halign: "center"
+                    theme_text_color: "Hint"
+                    font_style: "H6"
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(20)
+                    opacity: 0
+
+                MDGridLayout:
+                    id: menu_list
+                    cols: 2
+                    adaptive_height: True
+                    spacing: "10dp"
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: "10dp"
+            padding: "10dp"
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDRaisedButton:
+                text: "Add Item"
+                on_release: root.add_menu_item()
+
+            MDRaisedButton:
+                text: "Save Menu"
+                on_release: root.save_menu()
