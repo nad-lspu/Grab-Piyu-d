@@ -16,7 +16,6 @@ class CheckoutScreen(MDScreen):
     user_phone = ""
 
     def on_enter(self):
-        """Load order summary when screen is entered"""
         self.load_order_summary()
         self.load_user_data()
         self.ids.delivery_address.text = ""
@@ -25,11 +24,9 @@ class CheckoutScreen(MDScreen):
         self.set_delivery_method("delivery")
 
     def on_pre_enter(self):
-        """Set focus to delivery address when screen is about to be shown"""
         Clock.schedule_once(self.focus_delivery_address, 0.1)
 
     def focus_delivery_address(self, dt):
-        """Set focus to delivery address field"""
         self.ids.delivery_address.focus = True
 
     def load_user_data(self):
